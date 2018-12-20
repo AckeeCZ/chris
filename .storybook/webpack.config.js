@@ -12,17 +12,6 @@ module.exports = {
                 include: path.resolve(__dirname, '../')
             },
             {
-                test: /\.less$/,
-                loaders: [
-                    "style-loader",
-                    "css-loader", {
-                        loader: "less-loader",
-                        options: { javascriptEnabled: true }
-                    }
-                ],
-                include: path.resolve(__dirname, '../')
-            },
-            {
                 test: /\.story\.(ts|js)x?$/,
                 loaders: [
                     {
