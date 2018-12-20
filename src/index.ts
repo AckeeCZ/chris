@@ -1,2 +1,2 @@
-export * from './actions';
-export { default as reducer } from './reducer';
+export * from './services/actions';
+export { default as reducer } from './services/reducer';
