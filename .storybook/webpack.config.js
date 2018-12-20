@@ -17,14 +17,16 @@ module.exports = {
                     {
                         loader: require.resolve('@storybook/addon-storysource/loader'),
                         options: {
+                            parser: 'typescript',
                             prettierConfig: {
                                 parser: 'babylon'
-                            }
+                            },
                         }
                     },
                 ],
                 enforce: 'pre',
                 include: [
+                    path.resolve(__dirname, '../src'),
                     path.resolve(__dirname, '../stories'),
                 ]
             },
