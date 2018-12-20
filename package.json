@@ -1,7 +1,7 @@
 {
     "name": "@ackee/$NAME",
     "version": "0.0.1",
-    "description": "Equipment for localizations at React-Redux-ReduxSaga stack",
+    "description": "$DESCRIPTION",
     "main": "lib/index.js",
     "module": "es/index.js",
     "scripts": {
