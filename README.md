@@ -9,8 +9,8 @@
 ## Table of contents
 
 * [Installation](#installation)
-* [Usage](#usage)
 * [API](#api)
+    * [Selectors](#selectors)
     
 
 ## <a name="installation"></a>Installation
@@ -27,4 +27,10 @@ Using yarn:
 ## <a name="usage"></a>Usage
 
 ## <a name="api"></a>API
+
+### <a name="selectors"></a>Selectors
+
+#### `routingSelector`
+
+Selector for [`connected-react-router`](https://github.com/supasate/connected-react-router) state, which returns [`location`](https://reacttraining.com/react-router/web/api/location).
 
