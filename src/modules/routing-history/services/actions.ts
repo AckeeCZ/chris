@@ -1,4 +1,4 @@
-import { Location } from 'history';
+import { Location } from '../dependecies';
 import types from './actionTypes';
 
 // eslint-disable-next-line import/prefer-default-export
