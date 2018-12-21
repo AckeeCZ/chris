@@ -39,9 +39,58 @@ Selector for [`connected-react-router`](https://github.com/supasate/connected-re
 
 #### `runRouteDependencies(handlers: {[ActionType], sagaHandler}, selector: ReduxSelector)`
 
-TBD
+With usage of `runRouteDependencies` and [`routing-history`](#module-routing-history), you can exclude business logic from React `componentDidMount` and `componentWillUnmount` and download the data you need for the current page outside of React components.
 
-#### runRouteActions(handlers: {[ActionType], sagaHandler})
+Example - react to new route
+
+```js
+import { runRouteDependencies } from '@ackee/chris';
+
+const handlers = {
+    '/user/:id': function* ({ id }) {
+        // fetch user data and store it
+    }
+};
+
+export default function* () {
+    yield all([
+        takeEvery(LOCATION_CHANGE, runRouteDependencies, handlers),
+    ])
+}
+```
+
+Example - react to new route and clean data when leaving it
+
+```js
+import { runRouteDependencies } from '@ackee/chris';
+import { routingHistory } from '@ackee/chris';
+
+const { activeLocationSelectorFactory, previousLocationSelectorFactory } = routingHistory;
+
+// 'history' is the name of routingHistory module state
+const activeLocationSelector = activeLocationSelectorFactory('history'); 
+const previousLocationSelector = previousLocationSelectorFactory('history');
+
+const handlers = {
+    '/user/:id': function* ({ id }) {
+        // fetch user data and store it
+    }
+};
+const postHandlers = {
+    '/user/:id': function* ({ id }) {
+        // flush user data from the store
+    }
+};
+
+export default function* () {
+    yield all([
+        takeEvery(LOCATION_CHANGE, runRouteDependencies, handlers, activeLocationSelector),
+        takeEvery(LOCATION_CHANGE, runRouteDependencies, postHandlers, previousLocationSelector),
+    ])
+}
+```
+
+#### `runRouteActions(handlers: {[ActionType], sagaHandler})`
 
 Alias for `runRouteDependencies` saga.
 
@@ -53,10 +102,11 @@ TBD
 
 TBD
 
+---
 
 ### <a name="modules"></a>Modules
 
-#### `routing history`
+#### <a name="module-routing-history">`routing history`
 
 There is a routing history module for handling history in redux & react-router apps called [routingHistory](./src/modules/routing-history/README.md)
 

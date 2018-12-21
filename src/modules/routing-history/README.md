@@ -12,7 +12,7 @@ As you can see, the module is intended to be used with **React**, **Redux** and 
 
 To make the module working, you have to inject its reducer and saga into your application.
 
-### reducer.js
+### Reducer
 
 ```javascript
 import { routingHistory } from '@ackee/chris';
@@ -29,7 +29,7 @@ const reducer = combineReducers({
 export default reducer;
 ```
 
-### saga.js
+### Saga
 
 ```javascript
 import { routingHistory } from  '@ackee/chris';
@@ -48,36 +48,3 @@ export default function*() {
 
 By now, the module is working. It listens on `LOCATION_CHANGE` action from **connected-react-router** and stores the info into the history reducer via the history saga. 
 If you want to access the info in the history reducer, we expose you two selectors. You can use them together with our `runRouteDependecies` helper to realize _on-route-change_ and _post-route-change_ actions.
-
-### routeDependeciesSaga.js
-
-```javascript
-import { runRouteDependencies } from 'ackee-frontend-toolkit/lib/sagas/routing';
-import {
-    activeLocationSelectorFactory,
-    routingHistory '@ackee/chris';
-...
-
-const activeLocationSelector = activeLocationSelectorFactory('history'); // remember i've told you to keep in mind the name of the reducer?
-const previousLocationSelector = previousLocationSelectorFactory('history');
-
-const handlers = {
-    '/user/:id': function* ({ id }) {
-        // fetch user data and store it
-    }
-};
-const postHandlers = {
-    '/user/:id': function* ({ id }) {
-        // flush user data from the store
-    }
-};
-
-export default function* () {
-    yield all([
-        takeEvery(LOCATION_CHANGE, runRouteDependencies, handlers, activeLocationSelector),
-        takeEvery(LOCATION_CHANGE, runRouteDependencies, postHandlers, previousLocationSelector),
-    ])
-}
-```
-
-With usage of `runRouteDependencies` and `routing-history`, you can exclude business logic from React `componentDidMount` and `componentWillUnmount` and download the data you need for the current page outside of React components. **Seperation of concerns huh? LIT!**
