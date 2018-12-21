@@ -11,6 +11,7 @@
 * [Installation](#installation)
 * [API](#api)
     * [Selectors](#selectors)
+    * [Sagas](#sagas)
     * [Modules](#modules)
     
 
@@ -33,6 +34,25 @@ Using yarn:
 Selector for [`connected-react-router`](https://github.com/supasate/connected-react-router) state, which returns [`location`](https://reacttraining.com/react-router/web/api/location).
 
 ----
+
+### <a name="sagas"></a>Sagas
+
+#### `runRouteDependencies(handlers: {[ActionType], sagaHandler}, selector: ReduxSelector)`
+
+TBD
+
+#### runRouteActions(handlers: {[ActionType], sagaHandler})
+
+Alias for `runRouteDependencies` saga.
+
+#### `routeRefresh(initType: ActionType, type: ActionType, handlers: function)`
+
+TBD
+
+#### `runSagas(sagas: {[ActionType]: sagaHandler})`
+
+TBD
+
 
 ### <a name="modules"></a>Modules
 

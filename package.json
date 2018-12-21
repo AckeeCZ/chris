@@ -27,7 +27,10 @@
         "url": "https://github.com/AckeeCZ/chris"
     },
     "dependencies": {
+        "@types/lodash": "^4.14.119",
         "@types/react-router": "^4.4.3",
+        "lodash": "^4.17.11",
+        "path-to-regexp": "^2.4.0",
         "utility-types": "^2.1.0"
     },
     "peerDependencies": {

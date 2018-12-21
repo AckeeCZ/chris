@@ -1,4 +1,6 @@
 import * as routingHistory from './modules/routing-history';
 
-export * from './services/selectors';
 export { routingHistory };
+
+export * from './services/selectors';
+export * from './services/sagas';
