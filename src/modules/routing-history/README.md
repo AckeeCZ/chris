@@ -17,6 +17,8 @@ To make the module working, you have to inject its reducer and saga into your ap
 ```javascript
 import { routingHistory } from '@ackee/chris';
 ...
+
+const { reducer: history } = routingHistory;
     
 const reducer = combineReducers({
     app,
@@ -32,6 +34,8 @@ export default reducer;
 ```javascript
 import { routingHistory } from  '@ackee/chris';
 ...
+
+const { saga: history } = routingHistory;
 
 export default function*() {
     yield all([

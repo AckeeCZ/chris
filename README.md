@@ -11,6 +11,7 @@
 * [Installation](#installation)
 * [API](#api)
     * [Selectors](#selectors)
+    * [Modules](#modules)
     
 
 ## <a name="installation"></a>Installation
@@ -23,9 +24,6 @@ Using yarn:
 
 `yarn add @ackee/chris`
 
-
-## <a name="usage"></a>Usage
-
 ## <a name="api"></a>API
 
 ### <a name="selectors"></a>Selectors
@@ -34,3 +32,14 @@ Using yarn:
 
 Selector for [`connected-react-router`](https://github.com/supasate/connected-react-router) state, which returns [`location`](https://reacttraining.com/react-router/web/api/location).
 
+----
+
+### <a name="modules"></a>Modules
+
+#### `routing history`
+
+There is a routing history module for handling history in redux & react-router apps called [routingHistory](./src/modules/routing-history/README.md)
+
+```js
+import { routingHistory } from '@ackee/chris';
+````
