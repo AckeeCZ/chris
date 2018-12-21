@@ -1,7 +1,7 @@
 {
-    "name": "@ackee/$NAME",
+    "name": "@ackee/chris",
     "version": "0.0.1",
-    "description": "$DESCRIPTION",
+    "description": "Useful additions for your redux - react-router based app",
     "main": "lib/index.js",
     "module": "es/index.js",
     "scripts": {
@@ -24,7 +24,7 @@
     "license": "MIT",
     "repository": {
         "type": "git",
-        "url": "https://github.com/AckeeCZ/$NAME"
+        "url": "https://github.com/AckeeCZ/chris"
     },
     "dependencies": {
         "react-display-name": "^0.2.4",
