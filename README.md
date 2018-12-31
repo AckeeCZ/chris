@@ -4,7 +4,7 @@
 
 > Useful additions for your redux - react-router based app.
 
-> Name of package refers to [Saint Christopher](https://en.wikipedia.org/wiki/Saint_Christopher), patron of travellers at their routes. Chris is just name's [shorter form](https://en.wikipedia.org/wiki/Chris) used for easier remembrance and writability.
+> Name of package refers to [Saint Christopher](https://en.wikipedia.org/wiki/Saint_Christopher), patron of travellers at their routes. Chris is just it's [shorter form](https://en.wikipedia.org/wiki/Chris) used for easier remembrance and writability.
 
 ## Table of contents
 
