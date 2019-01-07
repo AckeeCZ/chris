@@ -27,12 +27,17 @@
         "url": "https://github.com/AckeeCZ/chris"
     },
     "dependencies": {
-        "react-display-name": "^0.2.4",
+        "@types/lodash": "^4.14.119",
+        "@types/react-router": "^4.4.3",
+        "lodash": "^4.17.11",
+        "path-to-regexp": "^2.4.0",
         "utility-types": "^2.1.0"
     },
     "peerDependencies": {
         "prop-types": "^15.6.2",
-        "react": "^16.6.3"
+        "react": "^16.6.3",
+        "react-router": "^4.3.1",
+        "redux-saga": "^0.16.2"
     },
     "devDependencies": {
         "@babel/cli": "^7.2.0",
@@ -56,6 +61,7 @@
         "@types/storybook__react": "^4.0.0",
         "babel-jest": "^23.6.0",
         "babel-loader": "^8.0.4",
+        "connected-react-router": "^6.0.0",
         "cross-env": "^5.2.0",
         "enzyme": "^3.8.0",
         "enzyme-adapter-react-16": "^1.7.1",
@@ -69,6 +75,8 @@
         "prop-types": "^15.6.2",
         "react": "^16.6.3",
         "react-dom": "^16.6.3",
+        "react-router": "^4.3.1",
+        "redux-saga": "^0.16.2",
         "sass-loader": "^7.1.0",
         "tslint": "^5.12.0",
         "tslint-config-ackee": "^0.2.1",

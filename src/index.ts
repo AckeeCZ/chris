@@ -1,2 +1,6 @@
-export * from './services/actions';
-export { default as reducer } from './services/reducer';
+import * as routingHistory from './modules/routing-history';
+
+export { routingHistory };
+
+export * from './services/selectors';
+export * from './services/sagas';
