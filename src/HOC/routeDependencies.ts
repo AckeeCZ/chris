@@ -48,7 +48,7 @@ interface Config<P> {
     propsMapping: (props: P & OptionalProps) => void;
 }
 
-const routeDependencies = <P>(config: Config<P>) => {
+const routeDependencies = <P>(config?: Config<P>) => {
     const defaultConfig: Config<P> = {
         onRouteEnter: enterHandler,
         onRouteLeave: leaveHandler,
