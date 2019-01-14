@@ -1,6 +1,6 @@
 import { Action, PartialState } from '../types';
 import types from './actionTypes';
-import  { HistoryActions } from './constants';
+import { HistoryActions } from './constants';
 
 const initialState: PartialState = {
     previousLocation: null,
