@@ -37,8 +37,8 @@ const reRouteHandler = (oldProps: RouteComponentProps, newProps: RouteComponentP
     oldProps.location.hash !== newProps.location.hash;
 
 interface OptionalProps {
-    read?: () => void;
-    clear?: () => void;
+    read?: (...args: any[]) => void;
+    clear?: (...args: any[]) => void;
 }
 
 interface Config<P> {
@@ -48,7 +48,7 @@ interface Config<P> {
     propsMapping: (props: P & OptionalProps) => void;
 }
 
-const routeDependencies = <P>(config?: Config<P>) => {
+const routeDependencies = <P>(config?: Partial<Config<P>>) => {
     const defaultConfig: Config<P> = {
         onRouteEnter: enterHandler,
         onRouteLeave: leaveHandler,
