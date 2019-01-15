@@ -41,15 +41,15 @@ interface OptionalProps {
     clear?: (...args: any[]) => void;
 }
 
-interface Config<P> {
+interface Config<P, P2> {
     onRouteEnter: (props: P & OptionalProps) => void;
     onRouteLeave: (props: P & OptionalProps) => void;
     shouldReRoute: (prevProps: P & RouteComponentProps, props: P & RouteComponentProps) => boolean;
-    propsMapping: (props: P & OptionalProps) => void;
+    propsMapping: (props: P & OptionalProps) => P2;
 }
 
-const routeDependencies = <P>(config?: Partial<Config<P>>) => {
-    const defaultConfig: Config<P> = {
+const routeDependencies = <P, P2 = {[key: string]: any}>(config?: Partial<Config<P, P2>>) => {
+    const defaultConfig: Config<P, P2> = {
         onRouteEnter: enterHandler,
         onRouteLeave: leaveHandler,
         shouldReRoute: reRouteHandler,

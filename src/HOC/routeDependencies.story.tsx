@@ -85,7 +85,7 @@ const delayedDispatch = (dispatch: Dispatch, reduxAction: ActionCreator<any>) =>
     };
 };
 
-storiesOf('HOC/translatable', module)
+storiesOf('HOC/routeDependencies', module)
     .addDecorator(story => (
         <StoreProvider store={store}>
             <ConnectedRouter history={history}>{story()}</ConnectedRouter>
