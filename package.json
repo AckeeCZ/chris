@@ -1,6 +1,6 @@
 {
     "name": "@ackee/chris",
-    "version": "0.2.0",
+    "version": "0.2.1",
     "description": "Useful additions for your redux - react-router based app",
     "main": "lib/index.js",
     "module": "es/index.js",
