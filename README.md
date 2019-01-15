@@ -13,6 +13,7 @@
     * [Selectors](#selectors)
     * [Sagas](#sagas)
     * [Modules](#modules)
+    * [Utilities](#utilities)
     
 
 ## <a name="installation"></a>Installation
@@ -113,3 +114,35 @@ There is a routing history module for handling history in redux & react-router a
 ```js
 import { routingHistory } from '@ackee/chris';
 ````
+
+--- 
+
+### <a name="utilities"></a>Utilities
+
+#### <a name="utilities-combine-dependencies-handlers"></a>`combineDependenciesHandlers(...routeHandlers) => combinedRouteHandlers`
+
+Helper to combine dependencies handlers for `runRouteDependecies`. Accepts infinite number of handlers objects `({'template': sagaHandler})` and returns exactly one for usage in `runRouteDependecies`. Supports same keys in the handlers objects
+
+##### Usage
+
+```js
+import { routeHandlers as usersHandlers } from 'Modules/users';
+import { routeHandlers as reviewsHandlers } from 'Modules/reviews';
+
+export const appHandlers = {
+    '/': homeSaga,
+    '/logout': function* () {
+        // ...
+    },
+};
+
+const combinedRouteHandlers = combineDependenciesHandlers(
+    appHandlers,
+    usersHandlers,
+    reviewsHandlers
+);
+
+runRouteDependencies(combinedRouteHandlers);
+```
+
+Each module (e.g. `Modules/users`) may exports its own `routeHandlers` object and the `combineDependenciesHandlers` utility handles their merging.
