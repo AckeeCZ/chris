@@ -54,6 +54,8 @@ interface Props {
     loadingText: string;
 }
 
+type ComponentProps = Pick<Props, 'loadingText'>;
+
 const UsersList = ({ users, loadingText }: Props) => (
     <ul>
         {users.length === 0 && loadingText}
@@ -92,7 +94,7 @@ storiesOf('HOC/routeDependencies', module)
         </StoreProvider>
     ))
     .add('default enter handler', () => {
-        const UsersListContainer = compose(
+        const UsersListContainer = compose<React.SFC<ComponentProps>>(
             connect(
                 (state: State) => ({ users: state.users.data }),
                 dispatch => ({ read: delayedDispatch(dispatch, readAndSetData) }),
@@ -103,7 +105,7 @@ storiesOf('HOC/routeDependencies', module)
         return <UsersListContainer loadingText="Načítám všechny uživatele..." />;
     })
     .add('custom enter handler', () => {
-        const UsersListContainer = compose(
+        const UsersListContainer = compose<React.SFC<ComponentProps>>(
             connect(
                 (state: State) => ({ users: state.users.data }),
                 dispatch => ({

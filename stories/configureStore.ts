@@ -16,7 +16,7 @@ declare global {
 
 export function configureStore(
     initialState: { [key: string]: any },
-    reducer: ReducersMapObject,
+    reducer: ReducersMapObject<any, any>,
     ...customMiddlewares: Middleware[]
 ) {
     const middlewares = [...customMiddlewares].filter(m => !!m);
