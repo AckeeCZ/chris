@@ -32,8 +32,7 @@
         "@types/recompose": "^0.30.2",
         "lodash": "^4.17.11",
         "path-to-regexp": "^2.4.0",
-        "recompose": "^0.30.0",
-        "utility-types": "^2.1.0"
+        "recompose": "^0.30.0"
     },
     "peerDependencies": {
         "prop-types": "^15.6.2",
