@@ -1,6 +1,6 @@
 {
     "name": "@ackee/chris",
-    "version": "0.3.0",
+    "version": "0.3.1",
     "description": "Useful additions for your redux - react-router based app",
     "main": "lib/index.js",
     "module": "es/index.js",
@@ -31,9 +31,8 @@
         "@types/react-router": "^4.4.3",
         "@types/recompose": "^0.30.2",
         "lodash": "^4.17.11",
-        "path-to-regexp": "^2.4.0",
-        "recompose": "^0.30.0",
-        "utility-types": "^2.1.0"
+        "path-to-regexp": "^3.0.0",
+        "recompose": "^0.30.0"
     },
     "peerDependencies": {
         "prop-types": "^15.6.2",
