@@ -14,6 +14,7 @@
     * [Sagas](#sagas)
     * [Modules](#modules)
     * [Utilities](#utilities)
+    * [HOC](#hoc)
     
 
 ## <a name="installation"></a>Installation
@@ -113,7 +114,7 @@ There is a routing history module for handling history in redux & react-router a
 
 ```js
 import { routingHistory } from '@ackee/chris';
-````
+```
 
 --- 
 
@@ -146,3 +147,79 @@ runRouteDependencies(combinedRouteHandlers);
 ```
 
 Each module (e.g. `Modules/users`) may exports its own `routeHandlers` object and the `combineDependenciesHandlers` utility handles their merging.
+
+--- 
+
+### <a name="hoc"></a>HOC
+
+#### <a name="route-dependencies-hoc"></a>`routeDependencies(config?: Config) => ComponentWithRouteDependencies`
+
+High order component used to request data for wrapped component. If you wrap your page components with the HOC it will ensure that data the page need will be request right after component render.
+
+In default HOC call `read` function passed through props when component mount and `clear` before it unmount. If it doesn't suit you, supply a config that define your way of handling. All methods in config are optional and if they aren't supplied, default ones are used.
+
+```typescript
+interface Config {
+    onRouteEnter?: (props) => void;
+    onRouteLeave?: (props) => void;
+    shouldReRoute?: (prevProps, nextProps) => boolean;
+    propsMapping?: (props: P & OptionalProps) => MappedProps;
+}
+```
+
+##### Example - Use with default config
+
+```js
+const UsersListPageContainer = compose(
+    connect(
+        state => ({ users: state.users }),
+        dispatch => bindActionCreators({ 
+            read: requestUsers,
+            clear: deleteUsers 
+        }, dispatch),
+    ),
+    routeDependencies(),
+)(UsersListPage);
+    
+const App = () => (
+    <Router>
+        <div>
+            <Route path="/users" component={UserListPageContainer}/>
+        </div>
+    </Router>
+);
+```
+
+##### Example - Use with custom config
+
+```js
+const UserDetailPageContainer = compose(
+    connect(
+        (state: State) => ({ users: state.user }),
+        dispatch => ({
+            requestUserDetail: delayedDispatch(dispatch, requestUser),
+            clearUserDetail: delayedDispatch(dispatch, clearUser),
+        }),
+    ),
+    routeDependencies({
+        onRouteEnter: ({ match, requestUserDetail }) => {
+            requestUserDetail(match.params.id);
+        },
+        onRouteLeave: ({ match, clearUserDetail }) => {
+            clearUserDetail();
+        },
+        shouldReroute: (prevProps, props) => {
+            return prevProps.match.params.id !=== props.match.params.id;
+        },
+    }),
+)(UserDetailPage);
+
+const App = () => (
+    <Router>
+        <div>
+            <Route path="/users/:id" component={UserDetailPageContainer}/>
+        </div>
+    </Router>
+);
+```
+

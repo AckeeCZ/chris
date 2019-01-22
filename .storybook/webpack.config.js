@@ -19,7 +19,7 @@ module.exports = {
                         options: {
                             parser: 'typescript',
                             prettierConfig: {
-                                parser: 'babylon'
+                                parser: 'typescript'
                             },
                         }
                     },
