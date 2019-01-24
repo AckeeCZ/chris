@@ -19,7 +19,7 @@
     * [HOC](#hoc)
     
 
-## <a name="installation"></a>Installation
+## Installation
 
 Using npm:
 
@@ -29,9 +29,9 @@ Using yarn:
 
 `yarn add @ackee/chris`
 
-## <a name="api"></a>API
+## API
 
-### <a name="selectors"></a>Selectors
+### Selectors
 
 #### `routingSelector`
 
@@ -39,11 +39,11 @@ Selector for [`connected-react-router`](https://github.com/supasate/connected-re
 
 ----
 
-### <a name="sagas"></a>Sagas
+### Sagas
 
 #### `runRouteDependencies(handlers: {[ActionType], sagaHandler}, selector: ReduxSelector)`
 
-With usage of `runRouteDependencies` and [`routing-history`](#module-routing-history), you can exclude business logic from React `componentDidMount` and `componentWillUnmount` and download the data you need for the current page outside of React components.
+With usage of `runRouteDependencies` and [`routing-history`](#routing-history), you can exclude business logic from React `componentDidMount` and `componentWillUnmount` and download the data you need for the current page outside of React components.
 
 Example - react to new route
 
@@ -108,9 +108,9 @@ TBD
 
 ---
 
-### <a name="modules"></a>Modules
+### Modules
 
-#### <a name="module-routing-history">`routing history`
+#### Routing history
 
 There is a routing history module for handling history in redux & react-router apps called [routingHistory](./src/modules/routing-history/README.md)
 
@@ -120,9 +120,9 @@ import { routingHistory } from '@ackee/chris';
 
 --- 
 
-### <a name="utilities"></a>Utilities
+### Utilities
 
-#### <a name="utilities-combine-dependencies-handlers"></a>`combineDependenciesHandlers(...routeHandlers) => combinedRouteHandlers`
+#### `combineDependenciesHandlers(...routeHandlers) => combinedRouteHandlers`
 
 Helper to combine dependencies handlers for `runRouteDependecies`. Accepts infinite number of handlers objects `({'template': sagaHandler})` and returns exactly one for usage in `runRouteDependecies`. Supports same keys in the handlers objects
 
@@ -152,9 +152,9 @@ Each module (e.g. `Modules/users`) may exports its own `routeHandlers` object an
 
 --- 
 
-### <a name="hoc"></a>HOC
+### HOC
 
-#### <a name="route-dependencies-hoc"></a>`routeDependencies(config?: Config) => ComponentWithRouteDependencies`
+#### `routeDependencies(config?: Config) => ComponentWithRouteDependencies`
 
 High order component used to request data for wrapped component. If you wrap your page components with the HOC it will ensure that data the page need will be request right after component render.
 
