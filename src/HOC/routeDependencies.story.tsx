@@ -109,13 +109,13 @@ storiesOf('HOC/routeDependencies', module)
             connect(
                 (state: State) => ({ users: state.users.data }),
                 dispatch => ({
-                    read: delayedDispatch(dispatch, readAndSetData),
+                    fetch: delayedDispatch(dispatch, readAndSetData),
                 }),
             ),
             routeDependencies({
-                onRouteEnter: ({ read }) => {
-                    if (typeof read === 'function') {
-                        read(1);
+                onRouteEnter: ({ fetch }) => {
+                    if (typeof fetch === 'function') {
+                        fetch(1);
                     }
                 },
             }),
