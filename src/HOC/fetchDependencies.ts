@@ -1,6 +1,6 @@
 import { compose } from 'redux';
-import { lifecycle, pure, mapProps } from 'recompose';
-import { identity, defaults } from 'lodash';
+import { lifecycle, pure } from 'recompose';
+import { defaults } from 'lodash';
 
 const logger = console;
 
@@ -37,21 +37,19 @@ interface OptionalProps {
     clear?: (...args: any[]) => void;
 }
 
-interface Config<P, P2> {
+interface Config<P> {
     onLoad: (props: P & OptionalProps) => void;
     onUnload: (props: P & OptionalProps) => void;
     shouldReFetch: (prevProps: P, props: P) => boolean;
-    propsMapping: (props: P & OptionalProps) => P2;
 }
 
-const fetchDependencies = <P, P2 = { [key: string]: any }>(config?: Partial<Config<P, P2>>) => {
-    const defaultConfig: Config<P, P2> = {
+const fetchDependencies = <P>(config?: Partial<Config<P>>) => {
+    const defaultConfig: Config<P> = {
         onLoad: enterHandler,
         onUnload: leaveHandler,
         shouldReFetch: reFetchHandler,
-        propsMapping: identity,
     };
-    const { onLoad, onUnload, shouldReFetch, propsMapping } = defaults(config, defaultConfig);
+    const { onLoad, onUnload, shouldReFetch } = defaults(config, defaultConfig);
     return compose(
         /* tslint:disable no-invalid-this */
         lifecycle<P & OptionalProps, {}>({
@@ -84,7 +82,6 @@ const fetchDependencies = <P, P2 = { [key: string]: any }>(config?: Partial<Conf
         }),
         /* tslint:enable no-invalid-this */
         pure,
-        mapProps(propsMapping),
     );
 };
 export default fetchDependencies;
