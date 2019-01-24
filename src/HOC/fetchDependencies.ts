@@ -31,7 +31,7 @@ const leaveHandler = (props: OptionalProps) => {
 
 const reFetchHandler = <P = any>(oldProps: P, newProps: P) => false;
 
-interface OptionalProps {
+export interface OptionalProps {
     fetch?: (...args: any[]) => void;
     clear?: (...args: any[]) => void;
 }

@@ -97,7 +97,7 @@ storiesOf('HOC/routeDependencies', module)
         const UsersListContainer = compose<React.SFC<ComponentProps>>(
             connect(
                 (state: State) => ({ users: state.users.data }),
-                dispatch => ({ read: delayedDispatch(dispatch, readAndSetData) }),
+                dispatch => ({ fetch: delayedDispatch(dispatch, readAndSetData) }),
             ),
             routeDependencies(),
         )(UsersList);
@@ -105,17 +105,21 @@ storiesOf('HOC/routeDependencies', module)
         return <UsersListContainer loadingText="Načítám všechny uživatele..." />;
     })
     .add('custom enter handler', () => {
+        interface ListProps {
+            users: User[];
+            read: (count?: number) => void;
+        }
         const UsersListContainer = compose<React.SFC<ComponentProps>>(
             connect(
                 (state: State) => ({ users: state.users.data }),
                 dispatch => ({
-                    fetch: delayedDispatch(dispatch, readAndSetData),
+                    read: delayedDispatch(dispatch, readAndSetData),
                 }),
             ),
-            routeDependencies({
-                onRouteEnter: ({ fetch }) => {
-                    if (typeof fetch === 'function') {
-                        fetch(1);
+            routeDependencies<ListProps>({
+                onRouteEnter: ({ read }) => {
+                    if (typeof read === 'function') {
+                        read(1);
                     }
                 },
             }),

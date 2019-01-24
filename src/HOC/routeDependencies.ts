@@ -1,6 +1,6 @@
 import { compose } from 'redux';
 import { withRouter, RouteComponentProps } from 'react-router';
-import fetchDependencies from './fetchDependencies';
+import fetchDependencies, { OptionalProps } from './fetchDependencies';
 
 const shouldReRoue = (oldProps: RouteComponentProps, newProps: RouteComponentProps) =>
     oldProps.location.pathname !== newProps.location.pathname ||
@@ -8,15 +8,15 @@ const shouldReRoue = (oldProps: RouteComponentProps, newProps: RouteComponentPro
     oldProps.location.hash !== newProps.location.hash;
 
 interface Config<P> {
-    onRouteEnter?: (props: P & RouteComponentProps) => void;
-    onRouteLeave?: (props: P & RouteComponentProps) => void;
-    shouldReRoute?: (prevProps: P & RouteComponentProps, props: P & RouteComponentProps) => boolean;
+    onRouteEnter?: (props: P) => void;
+    onRouteLeave?: (props: P) => void;
+    shouldReRoute?: (prevProps: P, props: P) => boolean;
 }
 
-const routeDependencies = <P>(config?: Partial<Config<P>>) => {
+const routeDependencies = <P>(config?: Partial<Config<P & OptionalProps & RouteComponentProps>>) => {
     return compose(
         withRouter,
-        fetchDependencies<P & RouteComponentProps>({
+        fetchDependencies<P & OptionalProps & RouteComponentProps>({
             onLoad: config && config.onRouteEnter,
             onUnload: config && config.onRouteLeave,
             shouldReFetch: (config && config.shouldReRoute) || shouldReRoue,
