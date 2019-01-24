@@ -1,8 +1,7 @@
 import { compose } from 'redux';
 import { lifecycle, pure } from 'recompose';
 import { defaults } from 'lodash';
-
-const logger = console;
+import { logger } from '../config';
 
 const log = {
     error: {
