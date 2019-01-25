@@ -6,13 +6,13 @@ import { logger } from '../config';
 const log = {
     error: {
         load(load: any) {
-            logger.warn(`The onLoad has to be a function. You have supplied: ${typeof load}`);
+            logger.error(`The onLoad has to be a function. You have supplied: ${typeof load}`);
         },
         unload(unload: any) {
-            logger.warn(`The onUnload has to be a function. You have supplied: ${typeof unload}`);
+            logger.error(`The onUnload has to be a function. You have supplied: ${typeof unload}`);
         },
         reFetch(reFetch: any) {
-            logger.warn(`The shouldReFetch has to be a function. You have supplied: ${typeof reFetch}`);
+            logger.error(`The shouldReFetch has to be a function. You have supplied: ${typeof reFetch}`);
         },
     },
 };
