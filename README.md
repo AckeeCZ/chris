@@ -154,18 +154,17 @@ Each module (e.g. `Modules/users`) may exports its own `routeHandlers` object an
 
 ### HOC
 
-#### `routeDependencies(config?: Config) => ComponentWithRouteDependencies`
+#### <a name="fetch-dependencies"></a>`fetchDependencies(config?: Config) => (Component) => ComponentThatFetchDependencies`
 
-High order component used to request data for wrapped component. If you wrap your page components with the HOC it will ensure that data the page need will be request right after component render.
+High order component used to request data for wrapped component. If you wrap your page components with the HOC it will ensure that data it needs will be requested right after component render.
 
-In default HOC call `read` function passed through props when component mount and `clear` before it unmount. If it doesn't suit you, supply a config that define your way of handling. All methods in config are optional and if they aren't supplied, default ones are used.
+In default HOC calls `fetch` function passed through props when component mounts and `clear` before it unmounts. If it doesn't suit your needs, supply a config that define your own way of handling. All methods in config are optional and if they aren't supplied, default ones are used.
 
 ```typescript
 interface Config {
-    onRouteEnter?: (props) => void;
-    onRouteLeave?: (props) => void;
-    shouldReRoute?: (prevProps, nextProps) => boolean;
-    propsMapping?: (props: P & OptionalProps) => MappedProps;
+    onLoad?: (props) => void;
+    onUnload?: (props) => void;
+    shouldReFetch?: (prevProps, nextProps) => boolean;
 }
 ```
 
@@ -176,7 +175,79 @@ const UsersListPageContainer = compose(
     connect(
         state => ({ users: state.users }),
         dispatch => bindActionCreators({ 
-            read: requestUsers,
+            fetch: requestUsers,
+            clear: deleteUsers 
+        }, dispatch),
+    ),
+    routeDependencies(),
+)(UsersListPage);
+    
+const App = () => (
+    <div>
+        <UserListPageContainer />
+    </div>
+);
+```
+
+##### Example - Use with custom config
+
+```js
+const UserDetailPageContainer = compose(
+    connect(
+        (state: State) => ({
+            user: state.user,
+            userId: state.selectedUserId
+        }),
+        dispatch => bindActionCreators({
+            requestUserDetail: requestUser,
+            clearUserDetail: clearUser,
+        }, dispatch),
+    ),
+    routeDependencies({
+        onLoad: ({ userId, requestUserDetail }) => {
+            requestUserDetail(userId);
+        },
+        onUnload: ({ clearUserDetail }) => {
+            clearUserDetail();
+        },
+        shouldReFetch: (prevProps, props) => {
+            return prevProps.userId !=== props.userId;
+        },
+    }),
+)(UserDetailPage);
+
+const App = () => (
+    <div>
+        <UserListPageContainer />
+    </div>
+);
+```
+
+#### <a name="route-dependencies"></a>`routeDependencies(config?: Config) => (Component) => ComponentWithRouteDependencies`
+
+> ![Alert](./assets/alert-icon.png) Important prerequistence for using the HOC is that you **must have `react-router`** in your app.
+
+ HOC has same purpose and works almost same as [`fetchDependencies`](#fetch-dependencies) with few exceptions.
+
+* It wraps component also with [`withRouter`](https://github.com/ReactTraining/react-router/blob/master/packages/react-router/docs/api/withRouter.md) HOC so all props receive also router's `match`, `location` and `history` objects.
+* Its config is slightly different especially in method names. Look at the definition:
+    ```typescript
+    interface Config {
+        onRouteEnter?: (props) => void;
+        onRouteLeave?: (props) => void;
+        shouldReRoute?: (prevProps, nextProps) => boolean;
+    }
+    ```
+* Default implementation of `shouldReRoute` invoke refetch of data every time any part of url change. It's used until you provide your own.
+
+##### Example - Use with default config
+
+```js
+const UsersListPageContainer = compose(
+    connect(
+        state => ({ users: state.users }),
+        dispatch => bindActionCreators({ 
+            fetch: requestUsers,
             clear: deleteUsers 
         }, dispatch),
     ),
@@ -197,11 +268,11 @@ const App = () => (
 ```js
 const UserDetailPageContainer = compose(
     connect(
-        (state: State) => ({ users: state.user }),
-        dispatch => ({
-            requestUserDetail: delayedDispatch(dispatch, requestUser),
-            clearUserDetail: delayedDispatch(dispatch, clearUser),
-        }),
+        (state: State) => ({ user: state.user }),
+        dispatch => bindActionCreators({
+            requestUserDetail: requestUser,
+            clearUserDetail: clearUser,
+        }, dispatch),
     ),
     routeDependencies({
         onRouteEnter: ({ match, requestUserDetail }) => {
@@ -210,7 +281,7 @@ const UserDetailPageContainer = compose(
         onRouteLeave: ({ match, clearUserDetail }) => {
             clearUserDetail();
         },
-        shouldReroute: (prevProps, props) => {
+        shouldReRoute: (prevProps, props) => {
             return prevProps.match.params.id !=== props.match.params.id;
         },
     }),
