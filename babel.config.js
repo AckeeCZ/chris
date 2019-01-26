@@ -4,13 +4,13 @@ module.exports = function(api) {
     const presets = {
         lib: ['@babel/typescript', '@babel/env', '@babel/react'],
         es: [
+            '@babel/typescript',
             [
-                '@babel/typescript',
+                '@babel/env',
                 {
                     modules: false,
                 },
             ],
-            '@babel/env',
             '@babel/react',
         ],
     };
