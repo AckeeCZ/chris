@@ -1,0 +1,13 @@
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.routingSelector = void 0;
+
+var routingSelector = function routingSelector(state) {
+  return state.router.location;
+};
+
+exports.routingSelector = routingSelector;
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uL3NyYy9zZXJ2aWNlcy9zZWxlY3RvcnMudHMiXSwibmFtZXMiOlsicm91dGluZ1NlbGVjdG9yIiwic3RhdGUiLCJyb3V0ZXIiLCJsb2NhdGlvbiJdLCJtYXBwaW5ncyI6Ijs7Ozs7OztBQUdPLElBQU1BLGVBQWUsR0FBRyxTQUFsQkEsZUFBa0IsQ0FBQ0MsS0FBRDtBQUFBLFNBQW9EQSxLQUFLLENBQUNDLE1BQU4sQ0FBYUMsUUFBakU7QUFBQSxDQUF4QiIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7IExvY2F0aW9uIH0gZnJvbSAnaGlzdG9yeSc7XG5pbXBvcnQgeyBSb3V0ZXJTdGF0ZSB9IGZyb20gJ2Nvbm5lY3RlZC1yZWFjdC1yb3V0ZXInO1xuXG5leHBvcnQgY29uc3Qgcm91dGluZ1NlbGVjdG9yID0gKHN0YXRlOiB7IHJvdXRlcjogUm91dGVyU3RhdGV9KTogTG9jYXRpb24gfCBudWxsID0+IHN0YXRlLnJvdXRlci5sb2NhdGlvbjtcbiJdfQ==
