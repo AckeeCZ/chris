@@ -16,6 +16,8 @@ const nextRelease = new Release(version, date);
 
 let commits = '';
 
+const capitalizeFirst = string => string.charAt(0).toUpperCase() + string.slice(1);
+
 if (repository) {
     changelog.url = repository.url;
 }
@@ -26,11 +28,29 @@ try {
     console.warn('Error when getting commits since last release');
 }
 
+const typeRegexps = {
+    added: /^Add(ed)?\s/,
+    fixed: /^Fix(ed)?\s/,
+    removed: /^Remove(d)?\s/,
+    changed: /^(Change|Update)(d)?\s/,
+};
+
 commits
     .toString()
     .split('\n')
     .filter(Boolean)
-    .forEach(message => nextRelease.added(message));
+    .forEach(message => {
+        for (const type in typeRegexps) {
+            const regexp = typeRegexps[type];
+
+            const typeMatch = message.match(regexp);
+            if (typeMatch) {
+                return nextRelease[type](capitalizeFirst(message.replace(typeMatch[0], '')));
+            }
+        }
+        // type not matched, add to added in default
+        nextRelease.added(message);
+    });
 
 changelog.addRelease(nextRelease);
 
