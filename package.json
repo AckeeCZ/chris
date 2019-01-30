@@ -16,7 +16,7 @@
         "type-check": "tsc --noEmit",
         "type-check:watch": "npm run type-check -- --watch",
         "start": "npm run build && onchange 'src/**/*.{ts,tsx}' -- npm run build",
-        "version": "node scripts/changelog.js && vim CHANGELOG.md && git add CHANGELOG.md"
+        "version": "changelog-it && vim CHANGELOG.md && git add CHANGELOG.md"
     },
     "author": "Lukáš Horák <lukas.horak@ackee.cz>",
     "contributors": [
@@ -63,6 +63,7 @@
         "@types/storybook__react": "^4.0.0",
         "babel-jest": "^23.6.0",
         "babel-loader": "^8.0.4",
+        "changelog-it": "github:AckeeCZ/changelog-it",
         "connected-react-router": "^6.0.0",
         "cross-env": "^5.2.0",
         "enzyme": "^3.8.0",
@@ -71,7 +72,6 @@
         "eslint-config-ackee": "^0.9.0",
         "eslint-plugin-jest": "^22.1.2",
         "jest": "^23.6.0",
-        "keep-a-changelog": "^0.7.0",
         "node-sass": "^4.11.0",
         "onchange": "^5.2.0",
         "prettier-config-ackee": "0.0.5",
