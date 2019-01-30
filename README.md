@@ -179,7 +179,7 @@ const UsersListPageContainer = compose(
             clear: deleteUsers 
         }, dispatch),
     ),
-    routeDependencies(),
+    fetchDependencies(),
 )(UsersListPage);
     
 const App = () => (
@@ -203,7 +203,7 @@ const UserDetailPageContainer = compose(
             clearUserDetail: clearUser,
         }, dispatch),
     ),
-    routeDependencies({
+    fetchDependencies({
         onLoad: ({ userId, requestUserDetail }) => {
             requestUserDetail(userId);
         },
