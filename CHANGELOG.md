@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [0.5.1] - 2019-01-29
+### Added
+- Ignoring of story for transpilation
+
+### Changed
+- Changelog script support change type prefixes
+
 ## [0.5.0] - 2019-01-29
 ### Added
 - Script for generating changelog
@@ -51,6 +58,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Changed
 - Upgrade storybook to v4 [`802c068`](https://github.com/AckeeCZ/chris/commit/802c0688bea38add24214313a334c7bc3e740463)
 
+[0.5.1]: https://github.com/AckeeCZ/chris/compare/v0.5.0...v0.5.1
 [0.5.0]: https://github.com/AckeeCZ/chris/compare/v0.4.1...v0.5.0
 [0.4.1]: https://github.com/AckeeCZ/chris/compare/v0.4.0...v0.4.1
 [0.4.0]: https://github.com/AckeeCZ/chris/compare/v0.3.1...v0.4.0
