@@ -5,7 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-## [v0.4.1] - 2019-01-30
+## [0.5.0] - 2019-01-29
+### Added
+- Script for generating changelog
+- Changelog
+
+## [0.4.1] - 2019-01-30
 ### Fixed
 - `fetchDependencies` example in README [`d96a6c2`](https://github.com/AckeeCZ/chris/commit/d96a6c2d04add1755bb2e5959cc635537d0ed210)
 
@@ -46,7 +51,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Changed
 - Upgrade storybook to v4 [`802c068`](https://github.com/AckeeCZ/chris/commit/802c0688bea38add24214313a334c7bc3e740463)
 
-[v0.4.1]: https://github.com/AckeeCZ/chris/compare/v0.4.0...v0.4.1
+[0.5.0]: https://github.com/AckeeCZ/chris/compare/v0.4.1...v0.5.0
+[0.4.1]: https://github.com/AckeeCZ/chris/compare/v0.4.0...v0.4.1
 [0.4.0]: https://github.com/AckeeCZ/chris/compare/v0.3.1...v0.4.0
 [0.3.1]: https://github.com/AckeeCZ/chris/compare/v0.3.0...v0.3.1
 [0.3.0]: https://github.com/AckeeCZ/chris/compare/v0.2.1...v0.3.0
