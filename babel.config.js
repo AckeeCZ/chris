@@ -11,6 +11,10 @@ module.exports = {
                     transform: 'lodash/${member}',
                     preventFullImport: true,
                 },
+                recompose: {
+                    transform: 'recompose/${member}',
+                    preventFullImport: true,
+                },
             },
         ],
     ],
