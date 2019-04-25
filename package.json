@@ -29,12 +29,12 @@
         "url": "https://github.com/AckeeCZ/chris"
     },
     "dependencies": {
-        "@types/lodash": "^4.14.119",
-        "@types/react-router": "^4.4.3",
-        "@types/recompose": "^0.30.2",
-        "lodash": "^4.17.11",
-        "path-to-regexp": "^3.0.0",
-        "recompose": "^0.30.0"
+        "@types/lodash": "4.14.x",
+        "@types/react-router": "4.4.x",
+        "@types/recompose": "0.30.x",
+        "lodash": "4.17.x",
+        "path-to-regexp": "3.0.x",
+        "recompose": "^0.30.x"
     },
     "peerDependencies": {
         "prop-types": "^15.6.2",
