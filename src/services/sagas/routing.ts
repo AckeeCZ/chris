@@ -1,4 +1,4 @@
-import { keys, get } from 'lodash';
+import { keys as _keys, get as _get } from 'lodash';
 import pathToRegex from 'path-to-regexp';
 import { Action as ReduxAction } from 'redux';
 import { put, select, all, takeEvery, takeLatest } from 'redux-saga/effects';
@@ -43,7 +43,7 @@ function* tryCatch(type: string, saga: GeneratorFunction): Generator {
  */
 export function* runSagas(sagas: { [actionType: string]: GeneratorFunction }) {
     const handlers = [];
-    const actionKeys = keys(sagas);
+    const actionKeys = _keys(sagas);
     for (const type of actionKeys) {
         const saga = sagas[type];
         handlers.push(tryCatch(type, saga));
@@ -70,7 +70,7 @@ function matchPathToTemplate(path: string, template: string): PathParams | null 
  */
 export function* runRouteDependencies(handlers: RouteHandlers, selector: LocationSelector = routingSelector) {
     const routing: Location = yield select(selector);
-    const pathname = get(routing, 'pathname');
+    const pathname = _get(routing, 'pathname');
 
     if (typeof pathname !== 'string') {
         logger.warn(
