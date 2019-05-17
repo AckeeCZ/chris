@@ -9,3 +9,4 @@ styles/
 bak/
 storybook-static/
 build/
+routing-history.js
