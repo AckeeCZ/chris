@@ -5,6 +5,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [0.6.0] - 2019-05-17
+### Changed
+- Separate routing-history aside of main index file to accomplish better tree shaking
+
 ## [0.5.5] - 2019-04-29
 ### Fixed
 - optimize `lodash` and `recompose` partial imports with `babel-plugin-transform-imports`
@@ -74,6 +78,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Changed
 - Upgrade storybook to v4 [`802c068`](https://github.com/AckeeCZ/chris/commit/802c0688bea38add24214313a334c7bc3e740463)
 
+[#8]: https://github.com/AckeeCZ/chris/issues/8
+
+[0.6.0]: https://github.com/AckeeCZ/chris/compare/v0.5.5...v0.6.0
 [0.5.5]: https://github.com/AckeeCZ/chris/compare/v0.5.4...v0.5.5
 [0.5.4]: https://github.com/AckeeCZ/chris/compare/v0.5.3...v0.5.4
 [0.5.3]: https://github.com/AckeeCZ/chris/compare/v0.5.2...v0.5.3
