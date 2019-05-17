@@ -67,7 +67,7 @@ Example - react to new route and clean data when leaving it
 
 ```js
 import { runRouteDependencies } from '@ackee/chris';
-import { routingHistory } from '@ackee/chris';
+import routingHistory from '@ackee/chris/routing-history';
 
 const { activeLocationSelectorFactory, previousLocationSelectorFactory } = routingHistory;
 
@@ -115,7 +115,7 @@ TBD
 There is a routing history module for handling history in redux & react-router apps called [routingHistory](./src/modules/routing-history/README.md)
 
 ```js
-import { routingHistory } from '@ackee/chris';
+import routingHistory from '@ackee/chris/routing-history';
 ```
 
 --- 

@@ -6,8 +6,9 @@
     "module": "es/index.js",
     "scripts": {
         "build:js": "babel src --out-dir lib --extensions \".ts,.tsx\" --ignore \"**/*.story.tsx,**/*.d.ts\" --source-maps inline",
+        "build:indexFiles": "babel ./*.ts --out-dir . --extensions \".ts\"  --source-maps inline",
         "build:types": "tsc --project tsconfig.types.json --emitDeclarationOnly",
-        "build": "npm run clean && npm run type-check && npm run build:js && npm run build:types",
+        "build": "npm run clean && npm run type-check && npm run build:js && npm run build:indexFiles && npm run build:types",
         "storybook": "rm -rf build && start-storybook -p 6006",
         "build-storybook": "cross-env BABEL_ENV=development build-storybook -o build",
         "lint": "tslint \"src/**/*.{ts,tsx}\"",

@@ -15,7 +15,7 @@ To make the module working, you have to inject its reducer and saga into your ap
 ### Reducer
 
 ```javascript
-import { routingHistory } from '@ackee/chris';
+import routingHistory from '@ackee/chris/routing-history';
 ...
 
 const { reducer: history } = routingHistory;
@@ -32,7 +32,7 @@ export default reducer;
 ### Saga
 
 ```javascript
-import { routingHistory } from  '@ackee/chris';
+import routingHistory from  '@ackee/chris/routing-history';
 ...
 
 const { saga: history } = routingHistory;
