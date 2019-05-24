@@ -36,9 +36,14 @@ export interface OptionalProps {
     clear?: (...args: any[]) => void;
 }
 
+export interface OptionalMeta {
+    mounting: boolean;
+    unmounting: boolean;
+}
+
 interface Config<P> {
-    onLoad: (props: P & OptionalProps) => void;
-    onUnload: (props: P & OptionalProps) => void;
+    onLoad: (props: P & OptionalProps, meta?: OptionalMeta) => void;
+    onUnload: (props: P & OptionalProps, meta?: OptionalMeta) => void;
     shouldReFetch: (prevProps: P, props: P) => boolean;
 }
 
@@ -56,7 +61,10 @@ const fetchDependencies = <P>(config?: Partial<Config<P>>) => {
                 if (typeof onLoad !== 'function') {
                     log.error.load(onLoad);
                 } else {
-                    onLoad(this.props);
+                    onLoad(this.props, {
+                        mounting: true,
+                        unmounting: false,
+                    });
                 }
             },
             componentDidUpdate(prevProps: P) {
@@ -67,15 +75,22 @@ const fetchDependencies = <P>(config?: Partial<Config<P>>) => {
                 } else if (typeof onUnload !== 'function') {
                     log.error.unload(onUnload);
                 } else if (shouldReFetch(prevProps, this.props)) {
-                    onUnload(this.props);
-                    onLoad(this.props);
+                    const meta = {
+                        mounting: false,
+                        unmounting: false,
+                    };
+                    onUnload(this.props, meta);
+                    onLoad(this.props, meta);
                 }
             },
             componentWillUnmount() {
                 if (typeof onUnload !== 'function') {
                     log.error.unload(onUnload);
                 } else {
-                    onUnload(this.props);
+                    onUnload(this.props, {
+                        mounting: false,
+                        unmounting: true,
+                    });
                 }
             },
         }),
