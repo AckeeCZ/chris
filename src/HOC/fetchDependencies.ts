@@ -38,6 +38,7 @@ export interface OptionalProps {
 
 export interface OptionalMeta {
     mounting: boolean;
+    unmounting: boolean;
 }
 
 interface Config<P> {
@@ -62,6 +63,7 @@ const fetchDependencies = <P>(config?: Partial<Config<P>>) => {
                 } else {
                     onLoad(this.props, {
                         mounting: true,
+                        unmounting: false,
                     });
                 }
             },
@@ -75,6 +77,7 @@ const fetchDependencies = <P>(config?: Partial<Config<P>>) => {
                 } else if (shouldReFetch(prevProps, this.props)) {
                     const meta = {
                         mounting: false,
+                        unmounting: false,
                     };
                     onUnload(this.props, meta);
                     onLoad(this.props, meta);
@@ -85,7 +88,8 @@ const fetchDependencies = <P>(config?: Partial<Config<P>>) => {
                     log.error.unload(onUnload);
                 } else {
                     onUnload(this.props, {
-                        mounting: true,
+                        mounting: false,
+                        unmounting: true,
                     });
                 }
             },
