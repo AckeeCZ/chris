@@ -5,7 +5,9 @@
     "main": "lib/index.js",
     "module": "es/index.js",
     "scripts": {
-        "build:js": "babel src --out-dir lib --extensions \".ts,.tsx\" --ignore \"**/*.story.tsx,**/*.d.ts\" --source-maps inline",
+        "build:lib": "BABEL_ENV=lib babel src --out-dir lib --extensions \".ts,.tsx\" --ignore \"**/*.story.tsx,**/*.d.ts\" --source-maps inline",
+        "build:es": "BABEL_ENV=es babel src --out-dir es --extensions \".ts,.tsx\" --ignore \"**/*.story.tsx,**/*.d.ts\" --source-maps inline",
+        "build:js": "npm run build:lib && npm run build:es",
         "build:indexFiles": "babel ./*.ts --out-dir . --extensions \".ts\"  --source-maps inline",
         "build:types": "tsc --project tsconfig.types.json --emitDeclarationOnly",
         "build": "npm run clean && npm run type-check && npm run build:js && npm run build:indexFiles && npm run build:types",
@@ -13,12 +15,12 @@
         "build-storybook": "cross-env BABEL_ENV=development build-storybook -o build",
         "lint": "tslint \"src/**/*.{ts,tsx}\"",
         "test": "BABEL_ENV=test jest",
-        "clean": "rm -rf lib",
+        "clean": "rm -rf lib es",
         "type-check": "tsc --noEmit",
         "type-check:watch": "npm run type-check -- --watch",
         "start": "npm run build && onchange 'src/**/*.{ts,tsx}' -- npm run build",
         "version": "changelog-it && vim CHANGELOG.md && git add CHANGELOG.md",
-        "size": "package-size ./lib --no-cache"
+        "size": "package-size ./es --no-cache"
     },
     "author": "Lukáš Horák <lukas.horak@ackee.cz>",
     "contributors": [
@@ -42,7 +44,7 @@
         "prop-types": "15.7.x",
         "react": "16.8.x",
         "react-router": "5.0.x",
-        "redux-saga": "0.16.x"
+        "redux-saga": "1.0.x"
     },
     "devDependencies": {
         "@babel/cli": "^7.2.0",
@@ -85,7 +87,7 @@
         "react-dom": "^16.6.3",
         "react-redux": "^6.0.0",
         "react-router": "^4.3.1",
-        "redux-saga": "^0.16.2",
+        "redux-saga": "^1.0.3",
         "sass-loader": "^7.1.0",
         "tslint": "^5.12.0",
         "tslint-config-ackee": "^0.2.1",
@@ -97,7 +99,8 @@
     "jest": {
         "testPathIgnorePatterns": [
             "/node_modules",
-            "/lib"
+            "/lib",
+            "/es"
         ],
         "setupTestFrameworkScriptFile": "./configure-jest.js"
     },
