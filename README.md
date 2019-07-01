@@ -149,7 +149,7 @@ function*() getData {
 
 export default function*() {
     return yield runSagas({
-        [actionTypes.designs.REQUEST_USERS]: getUsers,
+        [actionTypes.designs.REQUEST_USERS]: getData,
         [actionTypes.designs.REQUEST_OTHER_DATA]: getOtherData,
         ...
     });
@@ -161,6 +161,9 @@ export default function*() {
     * throw an error during its run, action `REQUEST_USERS_FAILED` with `error` property is dispatched
     * run without error then action `REQUEST_USERS_SUCCEEDED` with property `result` is dispatched, where result is anything that `getData` saga returns (nothing in our example 😀)
 * Action `REQUEST_USERS_COMPLETED` is dispatched at the end every time, no matter if running `getData` failed or succeded
+
+> Little magic explanation:  
+Actions dispatched during processing of a saga are automatically created inside the `runSagas` helper as a composition of the initial action (`REQUEST_USERS` in our example) and one of the prefixes - `_FAILED`, `_SUCCEEDED` or `_COMPLETED`.
 
 ---
 
