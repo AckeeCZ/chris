@@ -1,3 +1,3 @@
-import * as routingHistory from './src/modules/routing-history';
+import * as routingHistory from './lib/modules/routing-history';
 
 export default routingHistory;
