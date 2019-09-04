@@ -100,11 +100,70 @@ Alias for `runRouteDependencies` saga.
 
 #### `routeRefresh(initType: ActionType, type: ActionType, handlers: function)`
 
-TBD
+Saga to refresh route dependecies. It run `runRouteDependencies(handlers)` every time `initType` action is dispatched.
+Also action with `type` is dispatched before `runRouteDependencies` is invoked.
+
+Let's say we have an application with more pages that have list of items with paging. Every time page change we want to
+load new data for particular page.
+
+```jsx
+export default function* () {
+    yield all([
+        routeRefresh(
+            actionTypes.app.SET_PAGE_START,
+            actionTypes.app.SET_PAGE,
+            {
+                '/users': getUsers,
+                '/invoices': getInvoices,
+                ...
+            },
+        ),
+    ])
+}
+```
+
+When user change page of viewed list in application action `SET_PAGE_START` instead of `SET_PAGE` should be dispatched.
+Then `SET_PAGE_START` is caught in `routeRefresh` and following happen
+* action `SET_PAGE` is dispatched with all properties (except the `type` of course) from `SET_PAGE_START`. 
+The `SET_PAGE` action should set the page to the state.
+* as a next step, route dependencies are procceded with this call
+    ```js
+    runRouteDependencies({
+        '/users': getUsers,
+        '/invoices': getInvoices,
+        ...
+    })
+    ```
 
 #### `runSagas(sagas: {[ActionType]: sagaHandler})`
 
-TBD
+Automatically invokes all given sagas for given event. The invoke of saga is wrapped with try-catch saga that dispatch relevant actions. Look at the example fo better undestanding
+
+```js
+function*() getData {
+    // This is a pseudo code, implementation of getting data from the API 
+    // and setting them back to the state is up to you
+    const users = yield api.get(config.api.users);
+    yield put(setUsers(users));
+}
+
+export default function*() {
+    return yield runSagas({
+        [actionTypes.designs.REQUEST_USERS]: getData,
+        [actionTypes.designs.REQUEST_OTHER_DATA]: getOtherData,
+        ...
+    });
+}
+```
+
+* Once `REQUEST_USERS` is dispatched in application it's caught and handled by `getData` handler.
+* When `getData` saga
+    * throw an error during its run, action `REQUEST_USERS_FAILED` with `error` property is dispatched
+    * run without error then action `REQUEST_USERS_SUCCEEDED` with property `result` is dispatched, where result is anything that `getData` saga returns (nothing in our example 😀)
+* Action `REQUEST_USERS_COMPLETED` is dispatched at the end every time, no matter if running `getData` failed or succeded
+
+> Little magic explanation:  
+Actions dispatched during processing of a saga are automatically created inside the `runSagas` helper as a composition of the initial action (`REQUEST_USERS` in our example) and one of the prefixes - `_FAILED`, `_SUCCEEDED` or `_COMPLETED`.
 
 ---
 
