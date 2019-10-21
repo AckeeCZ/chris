@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [2.0.0] - 2019-10-21
+### Changed
+- Simplify routing-history module, it doesn't require to plug it's saga into an app
+
+###Added
+- Add basic documentation of routing-history selectors
+
 ## [1.0.2] - 2019-09-04
 ### Added
 - Fulfill missing TBD sections in readme
@@ -98,8 +105,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Changed
 - Upgrade storybook to v4 [`802c068`](https://github.com/AckeeCZ/chris/commit/802c0688bea38add24214313a334c7bc3e740463)
 
-[#11]: https://github.com/AckeeCZ/chris/issues/11
+[#12]: https://github.com/AckeeCZ/chris/issues/12
+[#14]: https://github.com/AckeeCZ/chris/issues/14
 
+[2.0.0]: https://github.com/AckeeCZ/chris/compare/v1.0.2...v2.0.0
 [1.0.2]: https://github.com/AckeeCZ/chris/compare/v1.0.1...v1.0.2
 [1.0.1]: https://github.com/AckeeCZ/chris/compare/v1.0.0...v1.0.1
 [1.0.0]: https://github.com/AckeeCZ/chris/compare/v0.6.1...v1.0.0
