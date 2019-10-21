@@ -1,6 +1,6 @@
+import { LOCATION_CHANGE } from '../dependecies';
+
 import { Action, PartialState } from '../types';
-import types from './actionTypes';
-import { HistoryActions } from './constants';
 
 const initialState: PartialState = {
     previousLocation: null,
@@ -9,14 +9,7 @@ const initialState: PartialState = {
 
 export default function(state: PartialState = initialState, action: Action) {
     switch (action.type) {
-        case types.ADD_LOCATION: {
-            const historyAction = action.payload.action;
-            if (historyAction === HistoryActions.POP) {
-                return {
-                    ...state,
-                    activeLocation: action.payload.location,
-                };
-            }
+        case LOCATION_CHANGE: {
             return {
                 previousLocation: state.activeLocation,
                 activeLocation: action.payload.location,

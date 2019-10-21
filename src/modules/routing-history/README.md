@@ -4,19 +4,17 @@ Routing history is a module for storing your routing history into redux store. I
 
 -   **redux** - to store the routing history
 -   **connected-react-router** - to access the info about path
--   **redux-saga** - to do the business logic 
 
 As you can see, the module is intended to be used with **React**, **Redux** and **React-router**.
 
 ## Table of contents
 
 * [Reducer](#reducer)
-* [Saga](#saga)
 * [Selectors](#selectors)
 
 ## Usage
 
-To make the module working, you have to inject its reducer and saga into your application.
+To make the module working, you have to inject its reducer into your application.
 
 ### Reducer
 
@@ -33,23 +31,6 @@ const reducer = combineReducers({
 })
 
 export default reducer;
-```
-
-### Saga
-
-```javascript
-import routingHistory from  '@ackee/chris/routing-history';
-...
-
-const { saga: history } = routingHistory;
-
-export default function*() {
-    yield all([
-        app(),
-        history(),
-        ...
-    ])
-}
 ```
 
 By now, the module is working. It listens on `LOCATION_CHANGE` action from **connected-react-router** and stores the info into the history reducer via the history saga. 

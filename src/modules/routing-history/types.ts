@@ -1,6 +1,6 @@
-import { Action as ReduxAction } from 'redux';
+import { LocationChangeAction } from 'connected-react-router';
+import { AnyAction as ReduxAction } from 'redux';
 import { Location } from 'history';
-import ActionTypes from './services/actionTypes';
 
 export type ReducerName = string;
 
@@ -13,6 +13,4 @@ export interface State {
     [key: string]: PartialState;
 }
 
-export interface Action extends ReduxAction<ActionTypes> {
-    [extraProps: string]: any;
-}
+export type Action = LocationChangeAction | ReduxAction;
